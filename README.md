@@ -6,7 +6,6 @@ To get the server working please navigate to the server folder in the project, r
 
 You will also need to change the file path in `server/app.js` at line 18 to the file path on your local machine.
 
-
 ## Details and approach
 
 This is a basic React app with image upload functionality.
@@ -14,7 +13,3 @@ This is a basic React app with image upload functionality.
 I used styled components for styling rather than a UI library.
 
 Video of app working: https://recordit.co/Ktgl9B6Nkj
-
-
-
-

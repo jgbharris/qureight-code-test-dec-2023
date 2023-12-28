@@ -4,23 +4,25 @@ import axios from "axios";
 
 function App() {
   const [file, setFile] = useState<File | null>(null);
-  const [image, setImage] = useState({});
-  const [imageSrc, setImageSrc] = useState("");
+  const [imageToBeUploaded, setImageToBeUploaded] = useState({});
+  const [imageForPreview, setImageForPreview] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (!file) {
       return;
     }
-    return setImageSrc(URL.createObjectURL(file));
+    return setImageForPreview(URL.createObjectURL(file));
   }, [file]);
 
   const handleUpload = () => {
-    axios.post("http://localhost:4000/isthisacat", image).then((res) => {
-      console.log("Axios response: ", res);
-    });
+    axios
+      .post("http://localhost:4000/isthisacat", imageToBeUploaded)
+      .then((res) => {
+        console.log("Axios response: ", res);
+      });
     // Clears preview image
-    setImageSrc("");
+    setImageForPreview("");
   };
 
   const handleClick = (e: any) => {
@@ -39,7 +41,7 @@ function App() {
       );
       setFile(e.target.files[0]);
     }
-    setImage(formData);
+    setImageToBeUploaded(formData);
     // Resets file input post upload
     e.target.value = null;
   };
@@ -51,10 +53,10 @@ function App() {
       </StyledRow>
       <StyledRow>
         <StyledImageContainer>
-          {!imageSrc ? (
+          {!imageForPreview ? (
             <StyledPlaceholderImage alt="preview" src="./image-icon.png" />
           ) : (
-            <StyledUploadImage alt="preview" src={imageSrc} />
+            <StyledUploadImage alt="preview" src={imageForPreview} />
           )}
         </StyledImageContainer>
       </StyledRow>
